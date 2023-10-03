@@ -71,11 +71,14 @@ export default function manage() {
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
                                                     {backupsever.date}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
+                                                {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
                                                     <img
                                                         src={`data:image/่jpeg;base64,${backupsever.date}`} // ใช้ backupsever.date ที่มีข้อมูล base64
                                                         alt="Base64 Image"
                                                     />
+                                                </td> */}
+                                                <td>
+                                                    <img src={backupsever.img} alt="User Profile" style={{ width: '100px', height: '100px' }} />
                                                 </td>
                                             </tr>
                                         ))}
