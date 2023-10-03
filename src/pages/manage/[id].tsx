@@ -77,15 +77,18 @@ export default function manage() {
                                                         alt="Base64 Image"
                                                     />
                                                 </td> */}
-                                                <td>
+                                                {/* <td>
                                                     <img src={backupsever.img} alt="User Profile" style={{ width: '100px', height: '100px' }} />
-                                                </td>
+                                                </td> */}
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        {backupseverData.slice(0, visibleItems).map((backupsever, index) => (
+                            <img src={backupsever.img} alt="User Profile" style={{ width: '100px', height: '100px' }} />
+                        ))}
                     </div>
                 </div>
             </LayoutPages>
