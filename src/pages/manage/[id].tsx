@@ -87,7 +87,9 @@ export default function manage() {
                             </div>
                         </div>
                         {backupseverData.slice(0, visibleItems).map((backupsever, index) => (
+                            <div className="">
                             <img src={backupsever.img} alt="User Profile" style={{ width: '100px', height: '100px' }} />
+                            </div>
                         ))}
                     </div>
                 </div>
