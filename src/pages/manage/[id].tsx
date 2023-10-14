@@ -86,11 +86,13 @@ export default function manage() {
                                 </table>
                             </div>
                         </div>
+                    
                         {backupseverData.slice(0, visibleItems).map((backupsever, index) => (
-                            <div className="">
-                            <img src={backupsever.img} alt="User Profile" style={{ width: '100px', height: '100px' }} />
+                            <div className=" mx-auto">
+                            <img src={backupsever.img} className=" mx-auto" alt="User Profile" style={{ width: '300px', height: '300px' }} />
                             </div>
                         ))}
+                     
                     </div>
                 </div>
             </LayoutPages>

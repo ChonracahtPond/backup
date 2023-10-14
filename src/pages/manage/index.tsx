@@ -38,7 +38,7 @@ export default function manage() {
   return (
     <>
       <LayoutPages>
-        <div className="flex flex-col">
+        <div className="flex flex-col mx-auto">
           <Link className=" mx-5 my-5"  href={"../manage/formback"} >
 
             <button
@@ -48,7 +48,7 @@ export default function manage() {
               เพิ่ม
             </button>
           </Link>
-          <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+          <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5 mx-auto" >
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div className="overflow-hidden">
                 <table className="min-w-full">
@@ -84,10 +84,6 @@ export default function manage() {
                               ดูรายละเอียด
                             </button>
                           </Link>
-                          <div>
-                            {/* Use the ViewDetail component with your newsSchool data */}
-                            {/* <ViewDetail data={backupsever} /> */}
-                          </div>
                         </td>
                       </tr>
                     ))}
