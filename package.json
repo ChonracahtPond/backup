@@ -15,6 +15,7 @@
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^4.16.2",
     "axios-hooks": "^5.0.0",
+    "chart.js": "^4.4.0",
     "firebase": "^10.4.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
@@ -23,6 +24,7 @@
     "react": "latest",
     "react-big-calendar": "^1.8.4",
     "react-calendar": "^4.6.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "latest",
     "sass": "^1.68.0"
   },

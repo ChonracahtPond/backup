@@ -48,6 +48,28 @@ export default function manage() {
               เพิ่ม
             </button>
           </Link>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
           <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5 mx-auto" >
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div className="overflow-hidden">
