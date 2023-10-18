@@ -13,7 +13,7 @@ interface Backupsever {
 
 
 export default function manage() {
-    const initialVisibleItems = 3;
+    const initialVisibleItems = 10000;
     const [visibleItems, setVisibleItems] = useState(initialVisibleItems);
     const [backupseverData, setBackupseverData] = useState<Backupsever[]>([]); // Use the defined interface here
     const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +21,7 @@ export default function manage() {
 
 
     const handleLoadMore = () => {
-        setVisibleItems(visibleItems + 3);
+        setVisibleItems(visibleItems + 1000);
     };
 
     useEffect(() => {
@@ -54,11 +54,18 @@ export default function manage() {
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                 ลำดับ
                                             </th>
+                                           
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                วันที่
+                                                ชื่อเครื่อง
                                             </th>
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                จัดการ
+                                                os
+                                            </th>
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                สถานะ
+                                            </th>
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                หมายเหตุ
                                             </th>
                                         </tr>
                                     </thead>
@@ -68,31 +75,55 @@ export default function manage() {
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {index + 1}
                                                 </td>
+                                               
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
-                                                    {backupsever.date}
+                                                    {backupsever.name}
                                                 </td>
-                                                {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
-                                                    <img
-                                                        src={`data:image/่jpeg;base64,${backupsever.date}`} // ใช้ backupsever.date ที่มีข้อมูล base64
-                                                        alt="Base64 Image"
-                                                    />
-                                                </td> */}
-                                                {/* <td>
-                                                    <img src={backupsever.img} alt="User Profile" style={{ width: '100px', height: '100px' }} />
-                                                </td> */}
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
+                                                    {backupsever.os}
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
+                                                    {backupsever.status}
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light">
+                                                    {backupsever.detail}
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <Link href={`/manage/edit/${backupsever.id}`}>
+
+                                                        <button
+                                                            className="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                                            data-ripple-light="true"
+                                                        >
+                                                            แก้ไข
+                                                        </button>
+                                                    </Link>
+                                                    <Link href={`/manage/${backupsever.id}`}>
+
+                                                        <button
+                                                            className="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                                            data-ripple-light="true"
+                                                        >
+                                                            ลบ
+                                                        </button>
+                                                    </Link>
+                                                </td>
+                                                
+
+
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    
-                        {backupseverData.slice(0, visibleItems).map((backupsever, index) => (
+
+                        {/* {backupseverData.slice(0, visibleItems).map((backupsever, index) => (
                             <div className=" mx-auto">
-                            <img src={backupsever.img} className=" mx-auto" alt="User Profile" style={{ width: '300px', height: '300px' }} />
+                                <img src={backupsever.img} className=" mx-auto" alt="User Profile" style={{ width: '300px', height: '300px' }} />
                             </div>
-                        ))}
-                     
+                        ))} */}
+
                     </div>
                 </div>
             </LayoutPages>

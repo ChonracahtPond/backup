@@ -16,9 +16,7 @@ export default function Navbar() {
           <Link href={'../manage/formback'} className='mx-2'>
             เพิ่มงาน
           </Link>
-          <Link href={'reservation'} className='mx-2'>
-            จองคิวงาน
-          </Link>
+         
           <Link href={'/lastwork'} className='mx-2'>
           ปฏิทินงาน
           </Link>
