@@ -7,79 +7,77 @@ export default function Home() {
     const [{ error: errorMessage, loading: IndexActivityLoading }, executeIndexActivity] = useAxios(
         { url: '/api/backupsever', method: 'POST' },
         { manual: true }
-    )
+    );
 
     const [date, setdate] = useState<string>("");
     const [name, setname] = useState<string>("");
     const [os, setos] = useState<string>("");
     const [status, setstatus] = useState<string>("");
     const [detail, setdetail] = useState<string>("");
-    const [img, setimg] = useState<string>("");
-    // const [messages, setmessages] = useState<string>("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [img, setImg] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [isMissingModalOpen, setIsMissingModalOpen] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isMissingModalOpen, setIsMissingModalOpen] = useState<boolean>(false);
+    const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // ตรวจสอบว่าข้อมูลถูกกรอกครบถ้วน
-        if (
-            !date || !name || !os || !detail
-
-        ) {
-
-            // ถ้าข้อมูลไม่ครบถ้วน ให้แสดง modal แจ้งเตือน
+        if (!date || !name || !os || !detail) {
             setIsMissingModalOpen(true);
             return;
         }
 
-        // ส่งข้อมูลไปยัง API
         try {
             setIsLoading(true);
             const response = await executeIndexActivity({
                 data: {
-                    date, name, os, status, detail, img,
-                    // เพิ่มข้อมูลอื่น ๆ ตามที่ต้องการ
+                    date,
+                    name,
+                    os,
+                    status,
+                    detail,
+                    img,
                 },
             });
-            // ประมวลผลเมื่อสำเร็จ
+
             setIsLoading(false);
             setIsSuccess(true);
             setMessage("สำเร็จ! คุณได้ทำการจองคิวเรียบร้อยแล้ว");
-
-            // setIsDataSent(true); 
-            // สร้าง state isDataSent และตั้งค่าเป็น true
             setIsModalOpen(true);
         } catch (error) {
-            // ประมวลผลเมื่อเกิดข้อผิดพลาด
             setIsLoading(false);
             setIsSuccess(false);
             setMessage("เกิดข้อผิดพลาดในการจองคิว");
         }
     };
 
-    // เรียกใช้งานฟังก์ชันเมื่อกดปุ่ม "จองคิว"
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
 
-    // เรียกใช้งานฟังก์ชันเมื่อกดปุ่ม "ยกเลิก"
     const handleCloseModal = () => {
-
         window.location.reload();
         setIsModalOpen(false);
     };
+
     const handleConfirm = () => {
-
         window.location.reload();
-        // ทำสิ่งที่คุณต้องการเมื่อยืนยัน
-        // ตัวอย่าง: ปิด Modal
         setIsModalOpen(false);
+    };
 
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const base64Data = event.target?.result as string;
+                setImg(base64Data);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     return (
@@ -158,32 +156,31 @@ export default function Home() {
                                     name="detail"
                                     id="detail"
                                     value={detail} onChange={(e) => setdetail(e.target.value)}
-                                    placeholder="เบอร์ติดต่อ"
+                                    placeholder="หมายเหตุ"
+                                    className="bg-[#F0FFE7] w-full rounded-md border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                />
+                            </div>
+                        </div>
+                        <div className=" px-3 sm:w-1/2 ">
+                            <div className="mb-5">
+                                <label
+                                    htmlFor="detail"
+                                    className="mb-3 block text-base font-medium text-[#07074D]"
+                                >
+                                    สถานะ
+                                </label>
+                                <input
+                                    type="text"
+                                    name="detail"
+                                    id="detail"
+                                    value={status} onChange={(e) => setstatus(e.target.value)}
+                                    placeholder="สถานะ"
                                     className="bg-[#F0FFE7] w-full rounded-md border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                 />
                             </div>
                         </div>
                     </div>
 
-
-                    {/* <div className=" px-3 sm:w-1/2 ">
-                        <div className="mb-5">
-                            <label
-                                htmlFor="img"
-                                className="mb-3 block text-base font-medium text-[#07074D]"
-                            >
-                                รูป
-                            </label>
-                            <input
-                                type="file"
-                                name="img"
-                                id="img"
-                                value={img} onChange={(e) => setimg(e.target.value)}
-                                placeholder="ชื่อ AE รับงาน"
-                                className="bg-[#F0FFE7] w-full rounded-md border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                            />
-                        </div>
-                    </div> */}
 
                     <div className=" flex justify-between">
                         <Link href={"/manage"}>
@@ -214,8 +211,8 @@ export default function Home() {
                     {isModalOpen && (
                         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                             <div className="bg-white p-6 rounded-lg mx-auto">
-                                <p className="text-2xl font-semibold mb-4">ยืนยันการสมัคร</p>
-                                <p>คุณต้องการจองคิวหรือไม่?</p>
+                                <p className="text-2xl font-semibold mb-4">ยืนยันการเพิ่มข้อมูล</p>
+                                <p>คุณต้องการเพิ่มข้อมูลหรือไม?</p>
                                 <div className="mt-4 flex justify-end">
                                     <button
                                         onClick={handleCloseModal} // เรียกใช้งานเมื่อกดปุ่ม "ยกเลิก"

@@ -4,42 +4,39 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import LayoutPages from '@/components/layout';
 
-interface Mark {
+interface Backupsever {
   id: number;
-  date: string;
-  time: string;
   name: string;
-  location: string;
-  cusname: string;
-  tel: string;
-  nameAE: string;
-  messages: string;
+  os: string;
+  status: string;
+  detail: string;
+  date: string;
 }
 
-const convertMarksToEvents = (marks: Mark[]) => {
-  return marks.map((mark) => {
+const convertBackupseversToEvents = (backupsevers: Backupsever[]): any[] => {
+  return backupsevers.map((backupsever) => {
     return {
-      title: mark.name,
-      start: new Date(mark.date),
-      end: new Date(mark.date),
+      title: backupsever.name,
+      start: new Date(backupsever.date),
+      end: new Date(backupsever.date),
     };
   });
 };
 
 function Lastwork() {
-  const [markData, setMarkData] = useState<Mark[]>([]);
+  const [backupseverData, setBackupseverData] = useState<Backupsever[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [eventsData, seteventsData] = useState<Date | null>(null);
+  const [eventsData, setEventsData] = useState<any[]>([]); // Use any[] for events data
   const localizer = momentLocalizer(moment);
-  const [selectedEvent, setSelectedEvent] = useState<Mark | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<Backupsever | null>(null);
 
   useEffect(() => {
-    fetch('/api/mark')
+    fetch('/api/backupsever')
       .then((response) => response.json())
-      .then((data: { mark: Mark[] }) => {
-        const eventsData = convertMarksToEvents(data.mark);
-        setMarkData(markData); // แก้ไขเป็น eventsData ไม่ใช่ markData
+      .then((data: { backupsever: Backupsever[] }) => {
+        const eventsData = convertBackupseversToEvents(data.backupsever);
+        setEventsData(eventsData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -50,30 +47,30 @@ function Lastwork() {
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
-  }
+  };
 
   return (
-
     <>
-    <LayoutPages>
-    <div className=' my-10'>
-      <Calendar
-        localizer={localizer}
-        events={markData}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
-        onSelectEvent={(event: any) => {
-          console.log('Event clicked:', event);
-          setSelectedEvent(event);
-        }}
-        onSelectSlot={(slotInfo: any) => {
-          console.log('Slot selected:', slotInfo);
-        }}
-      />
-    
-    </div>
-    </LayoutPages>
+      <LayoutPages>
+        <div className='my-10'>
+          <Calendar
+            localizer={localizer}
+            events={eventsData}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 500 }}
+            defaultDate={selectedDate}
+            onSelectEvent={(event: any) => {
+              console.log('Event clicked:', event);
+              setSelectedEvent(event);
+            }}
+            onSelectSlot={(slotInfo: any) => {
+              console.log('Slot selected:', slotInfo);
+            }}
+            onSelectDate={handleDateChange}
+          />
+        </div>
+      </LayoutPages>
     </>
   );
 }

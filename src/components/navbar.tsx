@@ -13,6 +13,9 @@ export default function Navbar() {
           <Link href={'/manage'} className='mx-2'>
             หน้าแรก
           </Link>
+          <Link href={'/manage/search'} className='mx-2'>
+            ค้นหาข้อมูล
+          </Link>
           <Link href={'../manage/formback'} className='mx-2'>
             เพิ่มงาน
           </Link>

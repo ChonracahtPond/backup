@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { useState, useEffect, ReactNode } from 'react';
 import ViewDetail from "./[id]";
 
-
 interface Backupsever {
     [x: string]: ReactNode;
     id: number;
@@ -117,12 +116,6 @@ export default function manage() {
                                 </table>
                             </div>
                         </div>
-
-                        {/* {backupseverData.slice(0, visibleItems).map((backupsever, index) => (
-                            <div className=" mx-auto">
-                                <img src={backupsever.img} className=" mx-auto" alt="User Profile" style={{ width: '300px', height: '300px' }} />
-                            </div>
-                        ))} */}
 
                     </div>
                 </div>

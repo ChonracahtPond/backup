@@ -2,13 +2,11 @@ import Link from "next/link";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LayoutPages from "@/components/layout";
-// import LatestUser from "../../container/User/LatestUser";
 
 
 const ReadUserDetail = () => {
     const router = useRouter();
     const { id } = router.query; // ดึงค่า id จาก query parameters
-
     const [userData, setUserData] = useState<any>({}); // กำหนดประเภทของข้อมูลบทความข่าว
     const [isLoading, setIsLoading] = useState(true);
 
@@ -20,7 +18,6 @@ const ReadUserDetail = () => {
                     setUserData(data); // กำหนดข้อมูลบทความข่าวที่ดึงมา
                     //console.log(data);
                     setIsLoading(false); // ตั้งค่า isLoading เป็น false เมื่อโหลดเสร็จสมบูรณ์
-
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -39,26 +36,6 @@ const ReadUserDetail = () => {
                             <p className="text-2xl md:text-4xl font-semibold "> ชื่อเครื่อง : {userData.name}</p>
                         </div>
                     </div>
-
-                    {/* Content Detail  */}
-                    {/* <div className="xl:grid xl:grid-cols-9 xl:gap-6 mx-4 xl:mx-0"> */}
-
-                    {/* Left Content */}
-                    {/* <div className="col-span-7 mt-10 rounded-lg">
-                            <div className="py-16">
-                           
-                                <article className="prose lg:prose-md md:mx-auto mt-8 px-2 md:px-0">
-                                    <h1>{userData.subfname}</h1>
-                                    <p>
-                                        {userData.detail}
-                                    </p>
-
-
-                                </article>
-                                
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
 
 

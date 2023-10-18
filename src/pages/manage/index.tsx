@@ -11,7 +11,6 @@ interface Backupsever {
 
 }
 
-
 export default function manage() {
   const initialVisibleItems = 3;
   const [visibleItems, setVisibleItems] = useState(initialVisibleItems);
@@ -34,6 +33,7 @@ export default function manage() {
       });
   }, []);
 
+  
 
   return (
     <>
